@@ -1,28 +1,45 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {
+	MuiThemeProvider
+} from '@material-ui/core/styles';
+
+import {
+	Routes
+} from './routes';
+import FirebaseApp from './config/firebase';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
-}
-
-export default App;
+	// holds the logged user
+	state = {
+		use: null
+	}
+	componentDidMount(){
+		this.authListener();
+	}
+	authListener = () => {
+		FirebaseApp.auth().onAuthStateChanged((user) => {
+			console.log(user);
+			this.setState({
+				user: user || null
+			});
+		})
+	}
+	render() {
+		const {
+			user
+		} = this.state;
+		return (
+			<MuiThemeProvider>
+				<p>
+					{user
+						? 'Logado'
+						: 'Não logado'}
+				</p>
+				<Routes />
+			</MuiThemeProvider>
+			);
+		}
+	}
+	
+	export default App;
+	
