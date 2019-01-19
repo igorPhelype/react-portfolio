@@ -79,6 +79,7 @@ class Login extends Component {
                             } />
                         <Input
                             name="password"
+                            type="password"
                             id="input-with-icon-adornment"
                             startAdornment={
                                 <InputAdornment position="start">
