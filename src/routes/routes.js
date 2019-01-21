@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 
-import {Login} from '../pages';
+import {Login, UserDashboard} from '../pages';
 
 class Routes extends Component {
     render() {
@@ -16,6 +16,7 @@ class Routes extends Component {
                             </ul>
                         </div>
                     )}/>
+                    <Route exact path={'/'} component={UserDashboard}/>
                     <Route exact path={'/login'} component={Login}/>
                     {/* <Route exact path={'/signup'} component={Signup}/> */}
                 </div>

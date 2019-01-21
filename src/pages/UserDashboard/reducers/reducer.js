@@ -1,9 +1,9 @@
 import {
-    LOGIN_USER
+    SET_USER
 } from '../actions/actionTypes'
 
 const typesMap = {
-    [LOGIN_USER]: (state, payload) => {
+    [SET_USER]: (state, payload) => {
         return payload;
     }
 }

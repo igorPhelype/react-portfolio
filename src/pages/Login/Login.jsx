@@ -41,6 +41,8 @@ const styles = (theme) => ({
 TODO: Fazer login
  */
 class Login extends Component {
+	static propTypes = {
+	}
     constructor(props) {
         super(props);
         this.state = {

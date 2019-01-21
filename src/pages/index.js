@@ -1,5 +1,7 @@
-import Login from './Login/login';
+import Login from './Login/Login';
+import UserDashboard from './UserDashboard/UserDashboard';
 
 export {
-    Login
+    Login,
+    UserDashboard
 }
