@@ -5,101 +5,58 @@ import {
     withStyles,
     CardContent,
     Input,
-    InputAdornment
+    InputAdornment,
+    CardActionArea,
+    CardMedia,
+    Typography
 } from '@material-ui/core';
-
-import {
-    AccountCircleRounded,
-    VpnKeyRounded
-} from '@material-ui/icons/';
-import moonflag from './moonFlag.svg';
-import {Link} from 'react-router-dom';
-import { FormToObject } from '../../utils/utils';
-import FirebaseApp from '../../config/firebase';
+import Firestore from '../../FirebaseUtils/firestore';
 
 const styles = (theme) => ({
     root: {
         width: '300px',
         margin: '0 auto'
     },
-    imageHolder: {
-        margin: '0 auto',
-        width: '200px',
-        '& img': {
-            width: '100%'
-        }
-    },
-    buttonHolder: {
-       '& button, a': {
-            display: 'block',
-            margin: '0 auto'
-       }
+    media: {
+        height: "300px"
     }
 })
 
-/*
-TODO: Fazer Gallery
- */
 class Gallery extends Component {
 	static propTypes = {
-	}
-    constructor(props) {
-        super(props);
-        this.state = {
-            user: {
-                name: '',
-                email: ''
-            }
-        };
     }
-    handleSubmit = (e) => {
-        const formData = FormToObject(e);
-        FirebaseApp.auth().signInWithEmailAndPassword(formData.email, formData.password).then((response) => {
-            console.log(response);
-        }).catch((e) => {
-            console.error(e);
+    state={
+        galleryItems: []
+    }
+    componentDidMount(){
+        // response.docs
+        Firestore.collection("publication").get().then(response => {
+            const galleryItems = response.docs.map(item => item.data());
+            this.setState({galleryItems});
         });
     }
     render() {
         const {
             classes
         } = this.props;
-        return (
-            <Card className={classes.root}>
-                <form onSubmit={this.handleSubmit}>
+        const {
+            galleryItems
+        } = this.state;
+        console.log("Gallery State: ", {state: this.state})
+        return galleryItems.map((item, index) => 
+            <Card key={index} className={classes.root}>
+                <CardActionArea>
+                    <CardMedia
+                        className={classes.media}
+                        src={"img"}
+                        image={item.imgUrl}
+                        title={item.title} />
+                    {/* <img src={item.imgUrl} /> */}
                     <CardContent>
-                        <div className={classes.imageHolder}>
-                            <img src={moonflag} />
-                        </div>
-                        <Input
-                            name="email"
-                            id="input-with-icon-adornment"
-                            startAdornment={
-                                <InputAdornment position="start">
-                                <AccountCircleRounded />
-                                </InputAdornment>
-                            } />
-                        <Input
-                            name="password"
-                            type="password"
-                            id="input-with-icon-adornment"
-                            startAdornment={
-                                <InputAdornment position="start">
-                                    <VpnKeyRounded />
-                                </InputAdornment>
-                            } />
+                        <Typography gutterBottom variant="h5" component="h2">{item.title}</Typography>
+                        <Typography component="p">{item.content}</Typography>
                     </CardContent>
-                    <div className={classes.buttonHolder}>
-                        {/* <Link to={'signup'}>
-                            <Button>
-                                Cadastrar
-                            </Button>
-                        </Link> */}
-                        <Button type="submit">
-                            Entrar
-                        </Button>
-                    </div>
-                </form>
+                </CardActionArea>
             </Card>
         );
     }

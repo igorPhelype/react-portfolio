@@ -37,9 +37,6 @@ const styles = (theme) => ({
     }
 })
 
-/*
-TODO: Fazer login
- */
 class Login extends Component {
 	static propTypes = {
 	}
