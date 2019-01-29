@@ -1,25 +1,49 @@
-import React, {Component} from 'react';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
+import React, { Component } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import AuthProvider from '../containers/AuthProvider';
+import { Gallery } from '../pages';
+import { AdminDashboard, Login } from '../pages/Admin';
+import RouteGen from './RouteGen';
 
-import {Login, UserDashboard, Gallery} from '../pages';
 
 class Routes extends Component {
+    static defaultProps = {
+        unauthenticatedRoutesMap: [
+            {
+                path: '/',
+                Component: Gallery,
+                exact: true
+            }, {
+                path: '/login',
+                Component: Login,
+                exact: true
+            }
+        ],
+        authenticatedRoutesMap: [
+            {
+                path: '/admin',
+                Component: AdminDashboard,
+                exact: true
+            }
+        ]
+    }
     render() {
+        console.log("ROUTES PROPS", this.props);
+        const {
+            unauthenticatedRoutesMap,
+            authenticatedRoutesMap
+        } = this.props;
         return (
             <Router>
                 <div>
-                    <Route path={'/'} render={()=>(
-                        <div>
-                            <ul>
-                                <li><Link to={'/login'}>Login</Link></li>
-                                <li><Link to={'/signup'}>Cadastrar</Link></li>
-                            </ul>
-                        </div>
-                    )}/>
-                    <Route exact path={'/'} component={Gallery}/>
-                    <Route exact path={'/admin'} component={UserDashboard}/>
-                    <Route exact path={'/login'} component={Login}/>
-                    {/* <Route exact path={'/signup'} component={Signup}/> */}
+                    <AuthProvider children={({user}) => {
+                        return (
+                            <>
+                                {unauthenticatedRoutesMap.map((item, index) => <RouteGen key={index} {...item} user={user} />)}
+                                {authenticatedRoutesMap.map((item, index) => <RouteGen key={index} {...item} user={user} />)}
+                            </>
+                        )
+                    }} />
                 </div>
             </Router>
         );

@@ -1,21 +1,11 @@
-import React, {Component} from 'react';
-import {
-    Card,
-    Button,
-    withStyles,
-    CardContent,
-    Input,
-    InputAdornment
-} from '@material-ui/core';
-
-import {
-    AccountCircleRounded,
-    VpnKeyRounded
-} from '@material-ui/icons/';
+import { Button, Card, CardContent, Input, InputAdornment, withStyles } from '@material-ui/core';
+import { AccountCircleRounded, VpnKeyRounded } from '@material-ui/icons/';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import { compose } from 'redux';
+import { signInEmailPass } from '../../../FirebaseUtils/auth';
+import { FormToObject } from '../../../utils/utils';
 import moonflag from './moonFlag.svg';
-import {Link} from 'react-router-dom';
-import { FormToObject } from '../../utils/utils';
-import FirebaseApp from '../../config/firebase';
 
 const styles = (theme) => ({
     root: {
@@ -49,9 +39,15 @@ class Login extends Component {
             }
         };
     }
+    componentDidMount(){
+        if(this.props.user){
+            this.props.history.push('/admin');
+        }
+    }
     handleSubmit = (e) => {
         const formData = FormToObject(e);
-        FirebaseApp.auth().signInWithEmailAndPassword(formData.email, formData.password).then((response) => {
+        console.log(formData);
+        signInEmailPass(formData).then((response) => {
             console.log(response);
         }).catch((e) => {
             console.error(e);
@@ -102,4 +98,7 @@ class Login extends Component {
     }
 }
 
-export default withStyles(styles)(Login);
+export default compose(
+    withStyles(styles),
+    withRouter
+)(Login);

@@ -23,20 +23,17 @@ export const signOut = () => {
  * whereToPush é um objeto que recebe:
     - 'success' => caminho para onde será redirecionado caso usuário esteja autenticado
     - 'fail' => caminho para onde será redirecionado caso usuário não esteja autenticado
+ * @param {*} setUser 
+ * @param {*} push 
+ * @param {*} whereToPush 
  */
-export const authListener = (setUser, push, whereToPush = {success: '', fail: ''}) => {
+export const authListener = (setUser) => {
     FirebaseAuth.onAuthStateChanged((user) => {
         console.log(user);
         if(user){
             setUser(user);
-            if(whereToPush.success) {
-                push(whereToPush.success);
-            }
         }else{
             setUser(null);
-            if(whereToPush.fail) {
-                push(whereToPush.fail);
-            }
         }
     });
 }

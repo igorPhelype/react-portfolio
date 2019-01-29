@@ -1,0 +1,9 @@
+{
+    "name": "React-Portfolio",
+    "description": "React portfolio",
+    "repository": "https://github.com/igorPhelype/martinafantini-api",
+    "logo": "https://cdn.rawgit.com/heroku/node-js-getting-started/master/public/node.svg",
+    "keywords": ["react", "redux", "firebase", "heroku"],
+    "image": "heroku/nodejs"
+}
+  
