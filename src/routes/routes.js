@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import AuthProvider from '../containers/AuthProvider';
 import { Gallery } from '../pages';
-import { AdminDashboard, Login } from '../pages/Admin';
+import { AdminDashboard, Login, Publications, Categories } from '../pages/Admin';
 import RouteGen from './RouteGen';
-
 
 class Routes extends Component {
     static defaultProps = {
@@ -23,6 +22,14 @@ class Routes extends Component {
             {
                 path: '/admin',
                 Component: AdminDashboard,
+                exact: true
+            }, {
+                path: '/publicacoes',
+                Component: Publications,
+                exact: true
+            }, {
+                path: '/categorias',
+                Component: Categories,
                 exact: true
             }
         ]
