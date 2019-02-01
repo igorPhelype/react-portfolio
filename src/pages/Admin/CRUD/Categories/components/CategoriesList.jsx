@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import EnhancedTable from './EnhancedTable';
+import { CRUDTable } from '../../../../../components';
 
 class CategoriesList extends Component {
     state = {}
@@ -11,6 +12,7 @@ class CategoriesList extends Component {
         return(
             <>
                 <EnhancedTable />
+                <CRUDTable />
             </>
         );
     }

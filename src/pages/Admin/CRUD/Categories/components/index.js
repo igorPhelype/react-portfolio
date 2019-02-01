@@ -1,5 +1,5 @@
-import CategoriesList from './CategoriesList';
+import CategoriesList from "./CategoriesList";
 
 export {
-    CategoriesList
-}
+	CategoriesList
+};
