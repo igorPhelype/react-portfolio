@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import AuthProvider from '../containers/AuthProvider';
 import { Gallery } from '../pages';
 import { AdminDashboard, Login, Publications, Categories } from '../pages/Admin';
 import RouteGen from './RouteGen';
+import { AuthProvider, AdminAppMainProvider } from '../containers';
 
 class Routes extends Component {
     static defaultProps = {
@@ -42,16 +42,16 @@ class Routes extends Component {
         } = this.props;
         return (
             <Router>
-                <div>
-                    <AuthProvider children={({user}) => {
-                        return (
-                            <>
-                                {unauthenticatedRoutesMap.map((item, index) => <RouteGen key={index} {...item} user={user} />)}
+                <AuthProvider children={({user}) => {
+                    return (
+                        <>
+                            {unauthenticatedRoutesMap.map((item, index) => <RouteGen key={index} {...item} user={user} />)}
+                            <AdminAppMainProvider>
                                 {authenticatedRoutesMap.map((item, index) => <RouteGen key={index} {...item} user={user} />)}
-                            </>
-                        )
-                    }} />
-                </div>
+                            </AdminAppMainProvider>
+                        </>
+                    )
+                }} />
             </Router>
         );
     }
