@@ -30,4 +30,19 @@ const Firestore = FirebaseApp.firestore();
 
 Firestore.settings({timestampsInSnapshots: true});
 
+const FirestoreGet = (collectionName) => {
+    return new Promise((resolve, reject) => {
+            Firestore.collection(collectionName).get().then(response => {
+                const items = response.docs.map(item => item.data());
+                resolve(items);
+            }).catch(e => {
+                reject(e)
+            });
+    });
+}
+
 export default Firestore;
+
+export {
+    FirestoreGet
+}

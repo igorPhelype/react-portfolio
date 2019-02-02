@@ -10,7 +10,7 @@ import {
     CardMedia,
     Typography
 } from '@material-ui/core';
-import Firestore from '../../FirebaseUtils/firestore';
+import Firestore, { FirestoreGet } from '../../FirebaseUtils/firestore';
 
 const styles = (theme) => ({
     root: {
@@ -29,11 +29,13 @@ class Gallery extends Component {
         galleryItems: []
     }
     componentDidMount(){
-        // response.docs
-        Firestore.collection("publication").get().then(response => {
-            const galleryItems = response.docs.map(item => item.data());
-            this.setState({galleryItems});
-        });
+        FirestoreGet("publication")
+            .then(response => {
+                this.setState({galleryItems: response});
+            })
+            .catch(e => {
+                this.setState({galleryItems: []})
+            });
     }
     render() {
         const {

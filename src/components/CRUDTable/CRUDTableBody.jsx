@@ -1,31 +1,31 @@
-import { withStyles, TableHead } from "@material-ui/core";
+import { withStyles, TableBody } from "@material-ui/core";
 import PropTypes from "prop-types";
 import React from "react";
 import { compose } from "redux";
 
 const styles = (theme) => ({});
 
-class CRUDTableHeader extends React.Component {
+class CRUDTableBody extends React.Component {
     state = {}
     static defaultProps = {
-        tableHeader: () => {}
+        tableBody: () => {}
     }
     static propTypes = {
-        tableHeader: PropTypes.func
+        tableBody: PropTypes.func
     }
 
     render() {
         const {
-            tableHeader
+            tableBody
         } = this.props;
     	return(
-    		<TableHead>
-                {tableHeader()}
-    		</TableHead>
+    		<TableBody>
+                {tableBody()}
+    		</TableBody>
     	);
     }
 }
 
 export default compose(
 	withStyles(styles),
-)(CRUDTableHeader);
+)(CRUDTableBody);

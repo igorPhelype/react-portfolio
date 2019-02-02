@@ -3,20 +3,32 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { compose } from 'redux';
 import CRUDTableHeader from './CRUDTableHeader';
+import CRUDTableBody from './CRUDTableBody';
 
 const styles = (theme) => ({});
 
 class CRUDTable extends React.Component {
     state = {}
-    static defaultProps = {}
+    static defaultProps = {
+        tableHeader: () => {},
+		tableBody: () => {},
+		isLoading: false
+	}
     static propTypes = {
-    	props: PropTypes.string
+		tableHeader: PropTypes.func,
+		tableBody: PropTypes.func,
+		isLoading: PropTypes.bool
     }
 
     render() {
+		const {
+			tableHeader,
+			tableBody
+		} = this.props;
     	return(
     		<Table>
-    			<CRUDTableHeader />
+    			<CRUDTableHeader tableHeader={tableHeader} />
+				<CRUDTableBody tableBody={tableBody} />
     		</Table>
     	);
     }
