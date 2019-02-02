@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import EnhancedTable from './EnhancedTable';
 import { CRUDTable } from '../../../../../components';
 import { TableRow, TableCell } from '@material-ui/core';
-import { FirestoreGet } from '../../../../../FirebaseUtils/firestore';
 
 class CategoriesList extends Component {
     state = {
@@ -14,19 +13,13 @@ class CategoriesList extends Component {
     static propTypes = {}
     
     componentDidMount(){
-        FirestoreGet("category")
-            .then(response => {
-                this.setState({categoryItems: response});
-            })
-            .catch(e => {
-                this.setState({categoryItems: []})
-            });
+        this.props.fetchCategories();
     }
     tableBody = (props) => {
         const{
-            categoryItems
-        } = this.state;
-        return categoryItems.map((item, index) => (
+            categoriesList
+        } = this.props;
+        return categoriesList.map((item, index) => (
             <TableRow key={index}>
                 <TableCell>{item.title}</TableCell>
                 <TableCell>{item.description}</TableCell>
@@ -42,6 +35,7 @@ class CategoriesList extends Component {
         )
     }
     render() {
+        console.log("CategoriesList Props", this.props);
         return(
             <>
                 {/* <EnhancedTable /> */}

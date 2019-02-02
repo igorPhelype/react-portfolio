@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import RouteGen from '../../../../routes/RouteGen';
-import { CategoriesList } from './components';
+import {CategoriesListContainer} from './containers';
 
 const Categories = (props) => {
     const {
@@ -19,7 +19,7 @@ Categories.defaultProps = {
     crudCategoriesRoutes: [
         {
             path: '/categorias',
-            Component: CategoriesList,
+            Component: CategoriesListContainer,
             exact: true
         },
         // {

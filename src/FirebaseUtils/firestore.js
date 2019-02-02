@@ -30,14 +30,19 @@ const Firestore = FirebaseApp.firestore();
 
 Firestore.settings({timestampsInSnapshots: true});
 
+/**
+ * Pega os dados específicos de uma collection
+ * Retorna uma Promise com o array dos items
+ * @param {*} collectionName 
+ */
 const FirestoreGet = (collectionName) => {
     return new Promise((resolve, reject) => {
-            Firestore.collection(collectionName).get().then(response => {
-                const items = response.docs.map(item => item.data());
-                resolve(items);
-            }).catch(e => {
-                reject(e)
-            });
+        Firestore.collection(collectionName).get().then(response => {
+            const items = response.docs.map(item => item.data());
+            resolve(items);
+        }).catch(e => {
+            reject(e)
+        });
     });
 }
 
