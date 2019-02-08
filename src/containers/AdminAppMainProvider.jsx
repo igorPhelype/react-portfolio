@@ -20,7 +20,7 @@ const styles = (theme) => ({
     }
 });
 
-class PageName extends React.Component {
+class AdminAppMainProvider extends React.Component {
     state = {}
     static defaultProps = {}
     static propTypes = {
@@ -54,4 +54,4 @@ class PageName extends React.Component {
 
 export default compose(
     withStyles(styles),
-)(PageName);
+)(AdminAppMainProvider);

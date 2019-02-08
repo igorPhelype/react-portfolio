@@ -24,11 +24,11 @@ class Routes extends Component {
                 Component: AdminDashboard,
                 exact: true
             }, {
-                path: '/publicacoes',
+                path: '/admin/publicacoes',
                 Component: Publications,
                 exact: true
             }, {
-                path: '/categorias',
+                path: '/admin/categorias',
                 Component: Categories,
                 exact: true
             }
@@ -46,9 +46,9 @@ class Routes extends Component {
                     return (
                         <>
                             {unauthenticatedRoutesMap.map((item, index) => <RouteGen key={index} {...item} user={user} />)}
-                            <AdminAppMainProvider>
+                            {user && <AdminAppMainProvider>
                                 {authenticatedRoutesMap.map((item, index) => <RouteGen key={index} {...item} user={user} />)}
-                            </AdminAppMainProvider>
+                            </AdminAppMainProvider>}
                         </>
                     )
                 }} />
