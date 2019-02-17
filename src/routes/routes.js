@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Gallery } from '../pages';
 import { AdminDashboard, Login, Publications, Categories } from '../pages/Admin';
 import RouteGen from './RouteGen';
-import { AuthProvider, AdminAppMainProvider } from '../containers';
+import { AuthProvider, AdminAppMainProvider, GalleryAppMainProvider } from '../containers';
 
 class Routes extends Component {
     static defaultProps = {
@@ -45,7 +45,9 @@ class Routes extends Component {
                 <AuthProvider children={({user}) => {
                     return (
                         <>
-                            {unauthenticatedRoutesMap.map((item, index) => <RouteGen key={index} {...item} user={user} />)}
+                            <GalleryAppMainProvider>
+                                {unauthenticatedRoutesMap.map((item, index) => <RouteGen key={index} {...item} user={user} />)}
+                            </GalleryAppMainProvider>
                             {user && <AdminAppMainProvider>
                                 {authenticatedRoutesMap.map((item, index) => <RouteGen key={index} {...item} user={user} />)}
                             </AdminAppMainProvider>}
