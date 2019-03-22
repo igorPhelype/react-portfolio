@@ -32,7 +32,7 @@ const styles = (theme) => ({
     }
 });
 
-class GalleryAppMainProvider extends React.Component {
+class GalleryAppBar extends React.Component {
     state = {}
     static defaultProps = {}
     static propTypes = {
@@ -71,4 +71,4 @@ class GalleryAppMainProvider extends React.Component {
 
 export default compose(
     withStyles(styles),
-)(GalleryAppMainProvider);
+)(GalleryAppBar);

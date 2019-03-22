@@ -11,6 +11,8 @@ import {
     Typography
 } from '@material-ui/core';
 import Firestore, { FirestoreGet } from '../../FirebaseUtils/firestore';
+import { compose } from 'redux';
+import { withGalleryAppMain } from '../../containers';
 
 const styles = (theme) => ({
     root: {
@@ -64,4 +66,4 @@ class Gallery extends Component {
     }
 }
 
-export default withStyles(styles)(Gallery);
+export default compose(withGalleryAppMain('Galeria'), withStyles(styles))(Gallery);

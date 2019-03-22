@@ -1,9 +1,11 @@
 import AdminAppMainProvider from './AdminAppMainProvider';
-import GalleryAppMainProvider from './GalleryAppMainProvider';
+import withGalleryAppMain from './withGalleryAppMain';
+import GalleryAppBar from './GalleryAppBar';
 import AuthProvider from './AuthProvider';
 
 export {
     AdminAppMainProvider,
     AuthProvider,
-    GalleryAppMainProvider
+    GalleryAppBar,
+    withGalleryAppMain
 }
