@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import AuthProvider from '../containers/AuthProvider';
 import { Gallery } from '../pages';
 import { AdminDashboard, Login, Publications, Categories } from '../pages/Admin';
 import RouteGen from './RouteGen';
+import { AuthProvider, AdminAppMainProvider } from '../containers';
 
 class Routes extends Component {
     static defaultProps = {
@@ -12,7 +12,8 @@ class Routes extends Component {
                 path: '/',
                 Component: Gallery,
                 exact: true
-            }, {
+            },
+            {
                 path: '/login',
                 Component: Login,
                 exact: true
@@ -24,11 +25,11 @@ class Routes extends Component {
                 Component: AdminDashboard,
                 exact: true
             }, {
-                path: '/publicacoes',
+                path: '/admin/publicacoes',
                 Component: Publications,
                 exact: true
             }, {
-                path: '/categorias',
+                path: '/admin/categorias',
                 Component: Categories,
                 exact: true
             }
@@ -38,20 +39,20 @@ class Routes extends Component {
         console.log("ROUTES PROPS", this.props);
         const {
             unauthenticatedRoutesMap,
-            authenticatedRoutesMap
+            authenticatedRoutesMap,
         } = this.props;
         return (
             <Router>
-                <div>
-                    <AuthProvider children={({user}) => {
-                        return (
-                            <>
-                                {unauthenticatedRoutesMap.map((item, index) => <RouteGen key={index} {...item} user={user} />)}
+                <AuthProvider children={({user}) => {
+                    return (
+                        <>
+                            {unauthenticatedRoutesMap.map((item, index) => <RouteGen key={index} {...item} user={user} />)}
+                            {user && <AdminAppMainProvider>
                                 {authenticatedRoutesMap.map((item, index) => <RouteGen key={index} {...item} user={user} />)}
-                            </>
-                        )
-                    }} />
-                </div>
+                            </AdminAppMainProvider>}
+                        </>
+                    )
+                }} />
             </Router>
         );
     }

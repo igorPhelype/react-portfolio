@@ -8,15 +8,29 @@ import { SET_USER } from '../pages/Admin/AdminDashboard/actions/actionTypes';
 
 class AuthProvider extends React.Component {
     static propTypes = {
-    }
+	}
+	state = {
+		authLoading: true
+	}
 	componentWillMount(){
-		authListener(this.props.setUser, this.props.history.push);
+		authListener((user) => {
+			this.props.setUser(user);
+			if(this.state.authLoading){
+				setTimeout(() => this.setState({authLoading: false}), 1000);
+			}
+		}, this.props.history.push);
 	}
     render() {
 		const {
 			user
 		} = this.props;
-        return <this.props.children user={user} />
+		const {
+			authLoading
+		} = this.state;
+        return (
+			authLoading
+				?	<div>Carregando...</div>
+				:	<this.props.children user={user} />)
     }
 }
 
