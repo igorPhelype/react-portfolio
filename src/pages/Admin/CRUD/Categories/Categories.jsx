@@ -18,7 +18,7 @@ const Categories = (props) => {
 Categories.defaultProps = {
     crudCategoriesRoutes: [
         {
-            path: '/categorias',
+            path: '/admin/categorias',
             Component: CategoriesListContainer,
             exact: true
         },

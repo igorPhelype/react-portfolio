@@ -13,8 +13,9 @@ export const authStateChanged = (callback) => {
 /**
  * 
  */
-export const signOut = () => {
-    return FirebaseAuth.signOut();
+export const signOut = (afterSignOut) => {
+    FirebaseAuth.signOut();
+    setTimeout(afterSignOut, 1000);
 }
 
 /**

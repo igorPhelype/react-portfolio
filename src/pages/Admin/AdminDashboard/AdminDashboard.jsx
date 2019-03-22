@@ -9,21 +9,23 @@ import { SET_USER } from './actions/actionTypes';
 class AdminDashboard extends Component {
 	static propTypes = {
 	}
-	componentDidMount(){
-        if(!this.props.user){
-            this.props.history.push('/login');
-        }
+	pushToLogin = () => {
+		console.log('pushing');
+		this.props.history.push('/login');
+	}
+	doSignOut = () => {
+		signOut(this.pushToLogin);
 	}
 	render() {
-		console.log('ADMIN DASHBOARD PROPS: ', this.props)
+		console.log('ADMIN DASHBOARD PROPS: ', {state: this.state});
 		const {
 			user
 		} = this.props;
 		return (
 			<div>
-				{user 
-					? 	<p>Bem vindo, {user.email} - <button onClick={signOut}>Sair</button></p>
-					:	`Carregando...`}
+				<p>
+					Bem vindo, {user.email} - <button onClick={this.doSignOut}>Sair</button>
+				</p>
 			</div>
 		)
 	}
