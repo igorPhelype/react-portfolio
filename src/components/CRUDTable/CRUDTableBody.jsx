@@ -7,6 +7,7 @@ const styles = (theme) => ({});
 
 class CRUDTableBody extends React.Component {
     state = {}
+
     static defaultProps = {
         tableBody: () => {}
     }
@@ -18,14 +19,14 @@ class CRUDTableBody extends React.Component {
         const {
             tableBody
         } = this.props;
-    	return(
-    		<TableBody>
+        return(
+            <TableBody>
                 {tableBody()}
-    		</TableBody>
-    	);
+            </TableBody>
+        );
     }
 }
-
+    
 export default compose(
-	withStyles(styles),
+    withStyles(styles),
 )(CRUDTableBody);

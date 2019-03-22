@@ -12,7 +12,8 @@ class Routes extends Component {
                 path: '/',
                 Component: Gallery,
                 exact: true
-            }, {
+            },
+            {
                 path: '/login',
                 Component: Login,
                 exact: true
@@ -38,7 +39,7 @@ class Routes extends Component {
         console.log("ROUTES PROPS", this.props);
         const {
             unauthenticatedRoutesMap,
-            authenticatedRoutesMap
+            authenticatedRoutesMap,
         } = this.props;
         return (
             <Router>

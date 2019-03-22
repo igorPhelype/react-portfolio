@@ -11,29 +11,29 @@ class CRUDTable extends React.Component {
     state = {}
     static defaultProps = {
         tableHeader: () => {},
-		tableBody: () => {},
-		isLoading: false
-	}
-    static propTypes = {
-		tableHeader: PropTypes.func,
-		tableBody: PropTypes.func,
-		isLoading: PropTypes.bool
+        tableBody: () => {},
+        isLoading: false
     }
-
+    static propTypes = {
+        tableHeader: PropTypes.func,
+        tableBody: PropTypes.func,
+        isLoading: PropTypes.bool
+    }
+    
     render() {
-		const {
-			tableHeader,
-			tableBody
-		} = this.props;
-    	return(
-    		<Table>
-    			<CRUDTableHeader tableHeader={tableHeader} />
-				<CRUDTableBody tableBody={tableBody} />
-    		</Table>
-    	);
+        const {
+            tableHeader,
+            tableBody
+        } = this.props;
+        return(
+            <Table>
+            <CRUDTableHeader tableHeader={tableHeader} />
+            <CRUDTableBody tableBody={tableBody} />
+            </Table>
+        );
     }
 }
-
+    
 export default compose(
-	withStyles(styles),
+    withStyles(styles),
 )(CRUDTable);

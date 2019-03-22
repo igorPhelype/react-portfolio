@@ -29,7 +29,7 @@ class AuthProvider extends React.Component {
 		} = this.state;
         return (
 			authLoading
-				?	<div>Carregando autenticação...</div>
+				?	<div>Carregando...</div>
 				:	<this.props.children user={user} />)
     }
 }
