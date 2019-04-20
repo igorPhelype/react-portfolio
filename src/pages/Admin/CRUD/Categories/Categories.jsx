@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import RouteGen from '../../../../routes/RouteGen';
 import {CategoriesListContainer} from './containers';
+import withAdminAppMain from '../../../../containers/withAdminAppMain';
 
 const Categories = (props) => {
     const {
@@ -33,4 +34,4 @@ Categories.propTypes = {
     crudCategoriesRoutes: PropTypes.array
 }
 
-export default Categories;
+export default withAdminAppMain(Categories);

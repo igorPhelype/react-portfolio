@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Gallery } from '../pages';
 import { AdminDashboard, Login, Publications, Categories } from '../pages/Admin';
 import RouteGen from './RouteGen';
-import { AuthProvider, AdminAppMainProvider } from '../containers';
+import { AuthProvider, AdminAppzMainProvider } from '../containers';
 
 class Routes extends Component {
     static defaultProps = {
@@ -47,9 +47,7 @@ class Routes extends Component {
                     return (
                         <>
                             {unauthenticatedRoutesMap.map((item, index) => <RouteGen key={index} {...item} user={user} />)}
-                            {user && <AdminAppMainProvider>
-                                {authenticatedRoutesMap.map((item, index) => <RouteGen key={index} {...item} user={user} />)}
-                            </AdminAppMainProvider>}
+                            {user && authenticatedRoutesMap.map((item, index) => <RouteGen key={index} {...item} user={user} />)}
                         </>
                     )
                 }} />

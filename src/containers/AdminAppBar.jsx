@@ -20,7 +20,7 @@ const styles = (theme) => ({
     }
 });
 
-class AdminAppMainProvider extends React.Component {
+class AdminAppBar extends React.Component {
     state = {}
     static defaultProps = {}
     static propTypes = {
@@ -54,4 +54,4 @@ class AdminAppMainProvider extends React.Component {
 
 export default compose(
     withStyles(styles),
-)(AdminAppMainProvider);
+)(AdminAppBar);

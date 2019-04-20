@@ -33,6 +33,7 @@ class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            loginErrorMessage: "",
             user: {
                 name: '',
                 email: ''
@@ -51,12 +52,17 @@ class Login extends Component {
             console.log(response);
         }).catch((e) => {
             console.error(e);
+            this.setState({loginErrorMessage: "Ocorreu um erro no login, tente novamente!"})
         });
     }
     render() {
         const {
             classes
         } = this.props;
+        const {
+            loginErrorMessage
+        } = this.state;
+        console.log("[LOGIN STATE and PROPS]", {state: this.state, props: this.props});
         return (
             <Card className={classes.root}>
                 <form onSubmit={this.handleSubmit}>
@@ -91,6 +97,7 @@ class Login extends Component {
                         <Button type="submit">
                             Entrar
                         </Button>
+                        <span style={{visibility: loginErrorMessage ? "hidden" : "visible"}}>{loginErrorMessage}</span>
                     </div>
                 </form>
             </Card>
