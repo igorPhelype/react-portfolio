@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Gallery } from '../pages';
-import { AdminDashboard, Login, Publications, Categories } from '../pages/Admin';
 import RouteGen from './RouteGen';
-import { AuthProvider, AdminAppzMainProvider } from '../containers';
 
 class Routes extends Component {
     static defaultProps = {
@@ -12,45 +10,19 @@ class Routes extends Component {
                 path: '/',
                 Component: Gallery,
                 exact: true
-            },
-            {
-                path: '/login',
-                Component: Login,
-                exact: true
-            }
-        ],
-        authenticatedRoutesMap: [
-            {
-                path: '/admin',
-                Component: AdminDashboard,
-                exact: true
-            }, {
-                path: '/admin/publicacoes',
-                Component: Publications,
-                exact: true
-            }, {
-                path: '/admin/categorias',
-                Component: Categories,
-                exact: true
             }
         ]
     }
     render() {
         console.log("ROUTES PROPS", this.props);
         const {
-            unauthenticatedRoutesMap,
-            authenticatedRoutesMap,
+            unauthenticatedRoutesMap
         } = this.props;
         return (
             <Router>
-                <AuthProvider children={({user}) => {
-                    return (
-                        <>
-                            {unauthenticatedRoutesMap.map((item, index) => <RouteGen key={index} {...item} user={user} />)}
-                            {user && authenticatedRoutesMap.map((item, index) => <RouteGen key={index} {...item} user={user} />)}
-                        </>
-                    )
-                }} />
+                <>
+                    {unauthenticatedRoutesMap.map((item, index) => <RouteGen key={index} {...item} />)}
+                </>
             </Router>
         );
     }

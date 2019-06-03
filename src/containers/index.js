@@ -1,11 +1,7 @@
-import AdminAppBar from './AdminAppBar';
-import withGalleryAppMain from './withGalleryAppMain';
 import GalleryAppBar from './GalleryAppBar';
-import AuthProvider from './AuthProvider';
+import withGalleryAppMain from './withGalleryAppMain';
 
 export {
-    AdminAppBar,
-    AuthProvider,
     GalleryAppBar,
     withGalleryAppMain
 }
