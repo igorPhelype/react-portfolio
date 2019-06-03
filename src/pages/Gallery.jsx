@@ -10,9 +10,8 @@ import {
     CardMedia,
     Typography
 } from '@material-ui/core';
-import Firestore, { FirestoreGet } from '../../FirebaseUtils/firestore';
 import { compose } from 'redux';
-import { withGalleryAppMain } from '../../containers';
+import { withGalleryAppMain } from '../containers';
 
 const styles = (theme) => ({
     root: {
@@ -31,13 +30,6 @@ class Gallery extends Component {
         galleryItems: []
     }
     componentDidMount(){
-        FirestoreGet("publication")
-            .then(response => {
-                this.setState({galleryItems: response});
-            })
-            .catch(e => {
-                this.setState({galleryItems: []})
-            });
     }
     render() {
         const {
@@ -50,12 +42,7 @@ class Gallery extends Component {
         return galleryItems.map((item, index) => 
             <Card key={index} className={classes.root}>
                 <CardActionArea>
-                    <CardMedia
-                        className={classes.media}
-                        src={"img"}
-                        image={item.imgUrl}
-                        title={item.title} />
-                    {/* <img src={item.imgUrl} /> */}
+                    <CardMedia className={classes.media} src={"img"} image={item.imgUrl} title={item.title} />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">{item.title}</Typography>
                         <Typography component="p">{item.content}</Typography>
