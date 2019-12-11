@@ -2,7 +2,7 @@ import React from 'react';
 import { GalleryAppBar } from ".";
 
 const withGalleryAppMain = (name) => (Component) => {
-    console.log("withGalleryAppMain", {name});
+    console.log("[withGalleryAppMain]", {name});
     const GalleryAppMainProvider = (props) => (
         <GalleryAppBar>
             <Component />
