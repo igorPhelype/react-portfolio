@@ -64,7 +64,7 @@
   },
   "scripts": {
     "start": "serve -s build",
-    "dev": "node scripts/start.js",
+    "dev": "export NODE_ENV=development && node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
     "serve": "serve -s build",

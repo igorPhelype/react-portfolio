@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core';
 import { compose } from 'redux';
 import { withGalleryAppMain } from '../containers';
+import { fetchPublications } from '../utils/apiUtils';
 
 const styles = (theme) => ({
     root: {
@@ -30,6 +31,11 @@ class Gallery extends Component {
         galleryItems: []
     }
     componentDidMount(){
+        fetchPublications().then((res) =>{
+            this.setState({galleryItems: res})
+        }).catch((err) => {
+            console.error(err)
+        });
     }
     render() {
         const {
@@ -38,7 +44,7 @@ class Gallery extends Component {
         const {
             galleryItems
         } = this.state;
-        console.log("Gallery State: ", {state: this.state})
+        console.log("Gallery Statex: ", {state: this.state})
         return galleryItems.map((item, index) => 
             <Card key={index} className={classes.root}>
                 <CardActionArea>
